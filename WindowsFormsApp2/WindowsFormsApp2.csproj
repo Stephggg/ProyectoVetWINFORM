@@ -82,6 +82,7 @@
     <Compile Include="PantallaEdicion.Designer.cs">
       <DependentUpon>PantallaEdicion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vacuna.cs" />
     <Compile Include="Perro.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

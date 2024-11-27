@@ -21,5 +21,10 @@ namespace WindowsFormsApp2
         {
 
         }
+
+        private void ListaVacunas_Load(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

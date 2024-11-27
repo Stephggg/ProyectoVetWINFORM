@@ -174,6 +174,7 @@
             this.dtpFechaRegistro.Name = "dtpFechaRegistro";
             this.dtpFechaRegistro.Size = new System.Drawing.Size(284, 23);
             this.dtpFechaRegistro.TabIndex = 49;
+            this.dtpFechaRegistro.ValueChanged += new System.EventHandler(this.dtpFechaRegistro_ValueChanged);
             // 
             // label6
             // 
@@ -217,6 +218,7 @@
             this.label4.Size = new System.Drawing.Size(34, 16);
             this.label4.TabIndex = 51;
             this.label4.Text = "ID:";
+            this.label4.Click += new System.EventHandler(this.label4_Click_1);
             // 
             // Paciente
             // 

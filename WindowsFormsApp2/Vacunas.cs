@@ -22,21 +22,8 @@ namespace WindowsFormsApp2
 
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        //Boton Regresar
         private void button2_Click(object sender, EventArgs e)
         {
             PantallaEdicion pantallaControles = new PantallaEdicion(panel7);
@@ -49,7 +36,50 @@ namespace WindowsFormsApp2
             }
         }
 
+        //Panel
         private void Regresar_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        //Imagen Vacunas
+        private void pictureBox1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        //ComboBox
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        //DateTimePicker
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        //Boton SuministraVacnua
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //Boton AgendarVacuna
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //TextBox Vacuna
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //TextBox Fecha
+        private void label1_Click_1(object sender, EventArgs e)
         {
 
         }
