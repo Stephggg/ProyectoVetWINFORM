@@ -68,6 +68,8 @@ namespace WindowsFormsApp2
             textBox5.Text = perroPantallaEdicion.Telefono;
             richTextBox1.Text = perroPantallaEdicion.Nota;
         }
+
+        //Boton Elimiar
         private void button1_Click(object sender, EventArgs e)
         {
             // Obtiene el ID del perro desde la etiqueta.
@@ -101,6 +103,7 @@ namespace WindowsFormsApp2
             }
         }
 
+        //Boton Editar
         private void button2_Click(object sender, EventArgs e)
         {
             int id = int.Parse(label4.Text.Split(':')[1].Trim());
@@ -163,6 +166,7 @@ namespace WindowsFormsApp2
             }
         }
 
+        //Boton Suministrar
         private void button3_Click(object sender, EventArgs e)
         {
             // Obtiene el ID del perro desde label4.
@@ -184,6 +188,7 @@ namespace WindowsFormsApp2
 
         }
 
+        //Boton Tarjeta de Vacunas
         private void button4_Click(object sender, EventArgs e)
         {
             TarjetaVacunas TarjetaVacunas = new TarjetaVacunas(panel7);
