@@ -28,15 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.panel5 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // panel5
             // 
-            this.panel5.BackgroundImage = global::WindowsFormsApp2.Properties.Resources.BzOL16MEqsKOe0VThjF6FXPBi0uyK16lkTety9Wz;
-            this.panel5.Location = new System.Drawing.Point(67, 121);
+            this.panel5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel5.BackgroundImage")));
+            this.panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(518, 302);
+            this.panel5.Size = new System.Drawing.Size(651, 538);
             this.panel5.TabIndex = 5;
             // 
             // Main
