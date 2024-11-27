@@ -15,5 +15,7 @@ namespace Perros
         public string Telefono { get; set; }
         public string Fecha_De_Nacimiento { get; set; }
         public string Nota { get; set; }
+
+        public List<string> Vacunas { get; set; } = new List<string>(); // Lista para almacenar las vacunas suministradas
     }
 }

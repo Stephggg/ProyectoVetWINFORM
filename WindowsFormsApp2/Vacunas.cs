@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,12 +65,67 @@ namespace WindowsFormsApp2
         private void button4_Click(object sender, EventArgs e)
         {
 
+            // Obtener la fecha seleccionada en el DateTimePicker
+            DateTime fechaSeleccionada = dateTimePicker1.Value;
+
+            // Validar si la fecha seleccionada es mayor que la fecha actual
+            if (fechaSeleccionada > DateTime.Now)
+            {
+                MessageBox.Show("La fecha debe ser igual o menor al día de hoy.");
+                return;
+            }
+            
+            // Obtener los valores seleccionados por el usuario
+            string vacunaSeleccionada = comboBox1.SelectedItem?.ToString();  // Obtener el valor seleccionado en el ComboBox
+
+            // Validar si el usuario ha seleccionado una vacuna
+            if (string.IsNullOrEmpty(vacunaSeleccionada))
+            {
+                MessageBox.Show("Por favor seleccione una vacuna.");
+                return;
+            }
+
+            // Guardar en un archivo de texto
+            string filePath = "vacunas.txt";
+            using (StreamWriter writer = new StreamWriter(filePath, true))
+            {
+                writer.WriteLine($"Vacuna: {vacunaSeleccionada}, Fecha: {fechaSeleccionada}");
+            }
+
+            MessageBox.Show("Vacuna suministrada y guardada correctamente.");
         }
 
         //Boton AgendarVacuna
         private void button1_Click(object sender, EventArgs e)
         {
+            // Obtener la fecha seleccionada en el DateTimePicker
+            DateTime fechaSeleccionada = dateTimePicker1.Value;
 
+            // Validar si la fecha seleccionada es mayor que la fecha actual
+            if (fechaSeleccionada <= DateTime.Now)
+            {
+                MessageBox.Show("La fecha debe ser posterior al día de hoy.");
+                return;
+            }
+
+            // Obtener el valor seleccionado en el ComboBox
+            string vacunaSeleccionada = comboBox1.SelectedItem?.ToString();
+
+            // Validar si el usuario ha seleccionado una vacuna
+            if (string.IsNullOrEmpty(vacunaSeleccionada))
+            {
+                MessageBox.Show("Por favor seleccione una vacuna.");
+                return;
+            }
+
+            // Guardar la vacuna y la fecha en un archivo de texto
+            string filePath = "vacunas_agendadas.txt"; // Un archivo diferente para las vacunas agendadas
+            using (StreamWriter writer = new StreamWriter(filePath, true))
+            {
+                writer.WriteLine($"Vacuna: {vacunaSeleccionada}, Fecha Agendada: {fechaSeleccionada.ToString("dd/MM/yyyy")}");
+            }
+
+            MessageBox.Show("Vacuna agendada correctamente.");
         }
 
         //TextBox Vacuna
