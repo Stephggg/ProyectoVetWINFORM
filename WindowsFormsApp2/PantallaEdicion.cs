@@ -165,7 +165,11 @@ namespace WindowsFormsApp2
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Regresar pantallaControles = new Regresar(panel7);
+            // Obtiene el ID del perro desde label4.
+            int idPerro = int.Parse(label4.Text.Split(':')[1].Trim());
+
+            // Crea la instancia de Regresar pasando el ID y el panel.
+            Regresar pantallaControles = new Regresar(panel7, idPerro);
 
             if (!panel7.Controls.Contains(pantallaControles))
             {
@@ -190,6 +194,41 @@ namespace WindowsFormsApp2
                 TarjetaVacunas.Dock = DockStyle.Fill;
                 TarjetaVacunas.BringToFront();
             }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpFechaRegistro_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

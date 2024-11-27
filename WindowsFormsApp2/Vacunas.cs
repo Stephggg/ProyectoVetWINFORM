@@ -16,10 +16,13 @@ namespace WindowsFormsApp2
     {
         private Panel panel7;
 
-        public Regresar(Panel panel)
+        private int perroID; // Variable para almacenar el ID del perro
+
+        public Regresar(Panel panel, int idPerro)
         {
             InitializeComponent();
             this.panel7 = panel;
+            this.perroID = idPerro; // Asigna el ID del perro seleccionado
 
         }
 
@@ -89,7 +92,8 @@ namespace WindowsFormsApp2
             string filePath = "vacunas.txt";
             using (StreamWriter writer = new StreamWriter(filePath, true))
             {
-                writer.WriteLine($"Vacuna: {vacunaSeleccionada}, Fecha: {fechaSeleccionada}");
+                // Incluye el ID del perro en el registro
+                writer.WriteLine($"ID: {perroID}, Vacuna: {vacunaSeleccionada}, Fecha: {fechaSeleccionada:dd/MM/yyyy}");
             }
 
             MessageBox.Show("Vacuna suministrada y guardada correctamente.");
@@ -119,10 +123,11 @@ namespace WindowsFormsApp2
             }
 
             // Guardar la vacuna y la fecha en un archivo de texto
-            string filePath = "vacunas_agendadas.txt"; // Un archivo diferente para las vacunas agendadas
+            string filePath = "vacunas_agendadas.txt";
             using (StreamWriter writer = new StreamWriter(filePath, true))
             {
-                writer.WriteLine($"Vacuna: {vacunaSeleccionada}, Fecha Agendada: {fechaSeleccionada.ToString("dd/MM/yyyy")}");
+                // Incluye el ID del perro en el registro
+                writer.WriteLine($"ID: {perroID}, Vacuna: {vacunaSeleccionada}, Fecha Agendada: {fechaSeleccionada:dd/MM/yyyy}");
             }
 
             MessageBox.Show("Vacuna agendada correctamente.");
