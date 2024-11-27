@@ -31,11 +31,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Vacuna = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.Vacuna = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,6 +63,7 @@
             this.label1.Size = new System.Drawing.Size(207, 19);
             this.label1.TabIndex = 59;
             this.label1.Text = "Vacunas Agendadas:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // dataGridView1
             // 
@@ -72,13 +73,23 @@
             this.Vacuna,
             this.Fecha});
             this.dataGridView1.Location = new System.Drawing.Point(69, 69);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 28;
             this.dataGridView1.Size = new System.Drawing.Size(505, 162);
             this.dataGridView1.TabIndex = 60;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // Vacuna
+            // 
+            this.Vacuna.HeaderText = "Vacuna";
+            this.Vacuna.Name = "Vacuna";
+            // 
+            // Fecha
+            // 
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
             // 
             // button2
             // 
@@ -108,6 +119,7 @@
             this.button1.TabIndex = 74;
             this.button1.Text = "Eliminar";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button3
             // 
@@ -122,16 +134,7 @@
             this.button3.TabIndex = 75;
             this.button3.Text = "Suministrar";
             this.button3.UseVisualStyleBackColor = false;
-            // 
-            // Vacuna
-            // 
-            this.Vacuna.HeaderText = "Vacuna";
-            this.Vacuna.Name = "Vacuna";
-            // 
-            // Fecha
-            // 
-            this.Fecha.HeaderText = "Fecha";
-            this.Fecha.Name = "Fecha";
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // dataGridView2
             // 
@@ -147,6 +150,7 @@
             this.dataGridView2.RowTemplate.Height = 28;
             this.dataGridView2.Size = new System.Drawing.Size(505, 162);
             this.dataGridView2.TabIndex = 76;
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -169,7 +173,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "TarjetaVacunas";
             this.Size = new System.Drawing.Size(646, 538);
             this.Load += new System.EventHandler(this.TarjetaVacunas_Load);
