@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vacuna
+namespace VacunaNamespace
 {
     public class Vacuna
     {
+        public int ID { get; set; }
         public string Nombre { get; set; }
-        public string Fecha { get; set; }
+        public DateTime Fecha { get; set; }
+        public string Estado { get; set; } // "Suministrada" o "Agendada"
     }
+
 }

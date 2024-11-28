@@ -22,7 +22,7 @@ namespace WindowsFormsApp2
 
             Listar listarControl = new Listar(panel7);
             PantallaEdicion listarControles = new PantallaEdicion(panel7);
-            TarjetaVacunas TarjetaVacunas = new TarjetaVacunas(panel7);
+            TarjetaVacunas TarjetaVacunas = new TarjetaVacunas(panel7, idPerro);
             Regresar regresar = new Regresar(panel7, idPerro); 
         }
 
