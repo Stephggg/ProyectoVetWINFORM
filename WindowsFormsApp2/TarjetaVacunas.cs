@@ -79,13 +79,9 @@ namespace WindowsFormsApp2
                         }
 
                         // Agregar la vacuna a la lista después de validar todos los datos.
-                        vacunas.Add(new Vacuna
-                        {
-                            ID = id,
-                            Nombre = vacunaPart,
-                            Fecha = fecha, // Formato deseado.
-                            Estado = "Suministrada"  // Puedes modificar el estado según corresponda.
-                        });
+                        // Dentro de CargarVacunasDesdeArchivo()
+                        vacunas.Add(new Vacuna(id, vacunaPart, fecha));  // Llamamos al constructor de Vacuna correctamente.
+
                     }
                 }
             }

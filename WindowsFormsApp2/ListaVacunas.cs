@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VacunaNamespace;
 
 namespace WindowsFormsApp2
 {
@@ -17,6 +18,8 @@ namespace WindowsFormsApp2
             InitializeComponent();
         }
 
+
+
         private void label3_Click(object sender, EventArgs e)
         {
 
@@ -25,6 +28,11 @@ namespace WindowsFormsApp2
         private void ListaVacunas_Load(object sender, EventArgs e)
         {
             
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
