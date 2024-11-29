@@ -16,110 +16,136 @@ namespace WindowsFormsApp2
     public partial class TarjetaVacunas : UserControl
     {
         private Panel panel7;
-        private int idPerro; //Campo para almacenar el id del perro
+        private int idPerro; // Agregamos la variable para almacenar el ID
 
+        // Constructor modificado para recibir el ID del perro
         public TarjetaVacunas(Panel panel, int idPerro)
         {
             InitializeComponent();
             this.panel7 = panel;
-            this.idPerro = idPerro; // Asignar el ID del perro al campo.
-
-            // Cargar datos al inicializar el control.
-            CargarVacunas();
-
+            this.idPerro = idPerro;  // Guardamos el ID del perro
+            CargarDatos();  // Llama a CargarDatos() al inicializar el formulario
         }
-
-        public TarjetaVacunas(Panel panel7)
+        private void ConfigurarEstiloDataGridView()
         {
-            this.panel7 = panel7;
-        }
-
-        private List<Vacuna> CargarVacunasDesdeArchivo()
-        {
-            List<Vacuna> vacunas = new List<Vacuna>();
-            try
+            // Configura las columnas del DataGridView para usar el modo Fill
+            foreach (DataGridViewColumn columna in dataGridView1.Columns)
             {
-                using (StreamReader reader = new StreamReader("vacunas.txt"))
+                columna.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+
+            // Opcional: Configurar estilos adicionales
+            dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True; // Permitir que el texto se ajuste
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells; // Ajustar filas automáticamente
+        }
+
+        private void CargarDatos()
+        {
+            string pathVacunasAgendadas = "vacunas_agendadas.txt";  // Archivo de vacunas agendadas
+            string pathVacunas = "vacunas.txt"; // Archivo de vacunas suministradas
+            string pathPerros = "perros.txt"; // Archivo de perros
+
+            // Verifica si los archivos existen
+            if (!File.Exists(pathVacunasAgendadas) || !File.Exists(pathVacunas) || !File.Exists(pathPerros))
+            {
+                MessageBox.Show("No se encontraron los archivos necesarios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Lee las líneas de los archivos
+            var vacunasAgendadasData = File.ReadAllLines(pathVacunasAgendadas);
+            var vacunasData = File.ReadAllLines(pathVacunas);
+            var perrosData = File.ReadAllLines(pathPerros);
+
+            // Procesa los datos de perros en un diccionario para acceso rápido
+            var perrosDict = new Dictionary<int, (string Nombre, string Dueño, string Telefono)>();
+            foreach (var linea in perrosData)
+            {
+                var partes = linea.Split(',');
+                if (partes.Length >= 6 && int.TryParse(partes[0], out int id))
                 {
-                    string line;
-                    int lineNumber = 0; // Para rastrear el número de línea en caso de error.
+                    perrosDict[id] = (partes[1], partes[3], partes[4]);
+                }
+            }
 
-                    while ((line = reader.ReadLine()) != null)
+            // Prepara las filas para los DataGridView
+            var filasVacunasAgendadas = new List<object[]>();
+            var filasVacunasSuministradas = new List<object[]>();
+
+            // Filtra las vacunas agendadas por el idPerro
+            foreach (var linea in vacunasAgendadasData)
+            {
+                var partes = linea.Split(',');
+                if (partes.Length >= 3 && partes[0].StartsWith("ID: ") && int.TryParse(partes[0].Substring(4), out int id))
+                {
+                    if (id == idPerro && perrosDict.TryGetValue(id, out var infoPerro))
                     {
-                        lineNumber++;
+                        var vacuna = partes[1].Split(':')[1].Trim();
+                        var fechaAgendadaStr = partes[2].Split(':')[1].Trim();
 
-                        // Eliminar espacios extra y verificar que la línea contiene las etiquetas adecuadas.
-                        line = line.Trim();
-                        if (string.IsNullOrEmpty(line)) continue;
-
-                        // Separar los componentes por comas
-                        string[] datos = line.Split(',');
-
-                        if (datos.Length != 3)
-                        {
-                            throw new FormatException($"Número incorrecto de columnas en la línea {lineNumber}: {line}");
-                        }
-
-                        // Extraer los valores después de los dos puntos
-                        string idPart = datos[0].Split(':')[1].Trim(); // Extraemos "1" de "ID: 1"
-                        string vacunaPart = datos[1].Split(':')[1].Trim(); // Extraemos "Especial Cachorros" de "Vacuna: Especial Cachorros"
-                        string fechaPart = datos[2].Split(':')[1].Trim();  // Extraemos "27/11/2024" de "Fecha: 27/11/2024"
-
-                        // Validar y convertir el ID.
-                        if (!int.TryParse(idPart, out int id))
-                        {
-                            throw new FormatException($"El ID no es válido en la línea {lineNumber}: {idPart}");
-                        }
-
-                        // Intentar convertir la fecha usando el formato específico
-                        DateTime fecha;
-                        if (!DateTime.TryParseExact(fechaPart, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out fecha))
-                        {
-                            throw new FormatException($"La fecha no es válida en la línea {lineNumber}: {fechaPart}");
-                        }
-
-                        // Agregar la vacuna a la lista después de validar todos los datos.
-                        // Dentro de CargarVacunasDesdeArchivo()
-                        vacunas.Add(new Vacuna(id, vacunaPart, fecha));  // Llamamos al constructor de Vacuna correctamente.
-
+                        filasVacunasAgendadas.Add(new object[] {
+                    id,
+                    infoPerro.Nombre,
+                    infoPerro.Dueño,
+                    infoPerro.Telefono,
+                    vacuna,
+                    fechaAgendadaStr
+                });
                     }
                 }
             }
-            catch (Exception ex)
+
+            // Filtra las vacunas suministradas por el idPerro
+            foreach (var linea in vacunasData)
             {
-                // Mostrar un mensaje de error con detalles sobre el problema.
-                MessageBox.Show($"Error al cargar las vacunas: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                var partes = linea.Split(',');
+                if (partes.Length >= 3 && partes[0].StartsWith("ID: ") && int.TryParse(partes[0].Substring(4), out int id))
+                {
+                    if (id == idPerro && perrosDict.TryGetValue(id, out var infoPerro))
+                    {
+                        var vacuna = partes[1].Split(':')[1].Trim();
+                        var fechaStr = partes[2].Split(':')[1].Trim();
+
+                        filasVacunasSuministradas.Add(new object[] {
+                    id,
+                    infoPerro.Nombre,
+                    infoPerro.Dueño,
+                    infoPerro.Telefono,
+                    vacuna,
+                    fechaStr
+                });
+                    }
+                }
             }
 
-            return vacunas;
+            // Configura los DataGridView
+            ConfigurarDataGridView(dataGridView1, filasVacunasSuministradas);
+            ConfigurarDataGridView(dataGridView2, filasVacunasAgendadas);
         }
 
-
-        private void CargarVacunas()
+        private void ConfigurarDataGridView(DataGridView dataGridView, List<object[]> filas)
         {
-            try
+            dataGridView.Columns.Clear();
+            dataGridView.Columns.Add("ID", "ID");
+            dataGridView.Columns.Add("Nombre", "Nombre del Perro");
+            dataGridView.Columns.Add("Dueño", "Dueño");
+            dataGridView.Columns.Add("Telefono", "Teléfono");
+            dataGridView.Columns.Add("Vacuna", "Vacuna");
+            dataGridView.Columns.Add("Fecha", "Fecha");  // Cambiado a "Fecha" para ambas
+
+            // Llama al método para configurar el estilo Fill
+            ConfigurarEstiloDataGridView();
+
+            // Agrega las filas correspondientes
+            foreach (var fila in filas)
             {
-                // Cargar vacunas desde un archivo o fuente de datos.
-                List<Vacuna> vacunas = CargarVacunasDesdeArchivo();
-
-                // Filtrar las vacunas según el ID del perro.
-                var vacunasSuministradas = vacunas
-                    .Where(v => v.ID == idPerro && v.Estado == "Suministrada")
-                    .ToList();
-
-                var vacunasAgendadas = vacunas
-                    .Where(v => v.ID == idPerro && v.Estado == "Agendada")
-                    .ToList();
-
-                // Asignar datos a los DataGridView.
-                dataGridView1.DataSource = vacunasSuministradas;
-                dataGridView2.DataSource = vacunasAgendadas;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al cargar las vacunas: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                dataGridView.Rows.Add(fila);
             }
         }
+
+
+
+
 
 
         //Texto VS
@@ -173,9 +199,101 @@ namespace WindowsFormsApp2
         }
 
         //Boton Eliminar Vacuna
+
         private void button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            // Verifica si se ha seleccionado alguna fila
+            if (dataGridView1.SelectedRows.Count == 0 && dataGridView2.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Por favor, selecciona una fila para eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string vacuna = string.Empty;
+            string fecha = string.Empty;
+            string idVacuna = string.Empty;
+
+            // Verifica si se seleccionó una fila en dataGridView1 (vacunas suministradas)
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                var selectedRow = dataGridView1.SelectedRows[0];
+                vacuna = selectedRow.Cells["Vacuna"].Value.ToString();
+                fecha = selectedRow.Cells["Fecha"].Value.ToString(); // La columna de fecha en vacunas.txt se llama "Fecha"
+                idVacuna = selectedRow.Cells["ID"].Value.ToString(); // Utiliza el ID de la fila para buscar la vacuna
+            }
+
+            // Verifica si se seleccionó una fila en dataGridView2 (vacunas agendadas)
+            else if (dataGridView2.SelectedRows.Count > 0)
+            {
+                var selectedRow = dataGridView2.SelectedRows[0];
+                vacuna = selectedRow.Cells["Vacuna"].Value.ToString();
+                fecha = selectedRow.Cells["Fecha"].Value.ToString(); // La columna de fecha en vacunas_agendadas.txt se llama "Fecha"
+                idVacuna = selectedRow.Cells["ID"].Value.ToString(); // Utiliza el ID de la fila para buscar la vacuna
+            }
+
+            // Si no se encontró la vacuna o la fecha, mostrar un mensaje
+            if (string.IsNullOrEmpty(vacuna) || string.IsNullOrEmpty(fecha))
+            {
+                MessageBox.Show("No se ha seleccionado una vacuna válida para eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Llamamos a la función para eliminar la vacuna del archivo correspondiente
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                EliminarVacunaDelArchivo("vacunas.txt", idVacuna, vacuna, fecha);
+            }
+            else if (dataGridView2.SelectedRows.Count > 0)
+            {
+                EliminarVacunaDelArchivo("vacunas_agendadas.txt", idVacuna, vacuna, fecha);
+            }
+        }
+
+        private void EliminarVacunaDelArchivo(string filePath, string idVacuna, string vacuna, string fecha)
+        {
+            try
+            {
+                // Leer todas las líneas del archivo
+                var lineas = File.ReadAllLines(filePath).ToList();
+
+                // Filtrar las líneas que no coinciden con la vacuna y fecha
+                var lineasFiltradas = lineas.Where(linea =>
+                {
+                    // Extraemos la información de cada línea para compararla
+                    var partes = linea.Split(',');
+                    if (partes.Length >= 3)
+                    {
+                        string id = partes[0].Substring(4); // Extrae el ID de la línea
+                        string vacunaInfo = partes[1].Split(':')[1].Trim(); // Extrae el nombre de la vacuna
+                        string fechaInfo = partes[2].Split(':')[1].Trim(); // Extrae la fecha
+
+                        // Compara ID, vacuna y fecha
+                        return !(id == idVacuna && vacunaInfo == vacuna && fechaInfo == fecha);
+                    }
+                    return true;
+                }).ToList();
+
+                // Sobrescribe el archivo con las líneas filtradas
+                File.WriteAllLines(filePath, lineasFiltradas);
+
+                // Muestra un mensaje de éxito
+                MessageBox.Show("La vacuna se ha eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Recarga los datos en los DataGridView después de la eliminación
+                CargarDatos();
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                MessageBox.Show($"Hubo un error al eliminar la vacuna: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
     }

@@ -82,16 +82,16 @@
     <Compile Include="PantallaEdicion.Designer.cs">
       <DependentUpon>PantallaEdicion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vacuna.cs" />
-    <Compile Include="Perro.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TarjetaVacunas.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="TarjetaVacunas.Designer.cs">
       <DependentUpon>TarjetaVacunas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vacuna.cs" />
+    <Compile Include="Perro.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vacunas.cs">
       <SubType>UserControl</SubType>
     </Compile>

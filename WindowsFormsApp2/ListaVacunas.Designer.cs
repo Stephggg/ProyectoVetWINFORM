@@ -53,10 +53,11 @@
             "Ultimos 20 dias",
             "Ultimos 30 dias",
             "Mayor a 30 dias"});
-            this.comboBox1.Location = new System.Drawing.Point(317, 29);
+            this.comboBox1.Location = new System.Drawing.Point(324, 29);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(161, 21);
+            this.comboBox1.Size = new System.Drawing.Size(170, 21);
             this.comboBox1.TabIndex = 3;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label1
             // 

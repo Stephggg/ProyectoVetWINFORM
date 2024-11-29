@@ -19,17 +19,14 @@ namespace WindowsFormsApp2
         {
             InitializeComponent();
             int idPerro = ObtenerIdPerro(); // Implementar cómo se obtiene el idPerro
-
             Listar listarControl = new Listar(panel7);
             PantallaEdicion listarControles = new PantallaEdicion(panel7);
-            TarjetaVacunas TarjetaVacunas = new TarjetaVacunas(panel7, idPerro);
             Regresar regresar = new Regresar(panel7, idPerro); 
         }
 
 
         private int ObtenerIdPerro()
         {
-            // Lógica para obtener idPerro (puede ser desde un TextBox, ComboBox, etc.)
             return 1; // Valor de ejemplo
         }
 

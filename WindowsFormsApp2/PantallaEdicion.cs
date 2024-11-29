@@ -8,7 +8,9 @@ namespace WindowsFormsApp2
 {
     public partial class PantallaEdicion : UserControl
     {
+        Form1 form1;
         private Panel panel7;
+        private int idPerro;
         private List<Perro> CargarPerrosDesdeArchivo()
         {
             List<Perro> perros = new List<Perro>();
@@ -44,6 +46,8 @@ namespace WindowsFormsApp2
         {
             InitializeComponent();
             this.panel7 = panel;
+            
+
         }
 
         public void CargarDatos(WindowsFormsApp2.Listar.Perro perroListar)
@@ -61,7 +65,7 @@ namespace WindowsFormsApp2
             };
 
             // Llena los controles de la interfaz con los datos del perro.
-            label4.Text = $"ID:        {perroPantallaEdicion.ID}";
+            label4.Text = $"ID: {perroPantallaEdicion.ID}";
             textBox1.Text = perroPantallaEdicion.Nombre;
             textBox4.Text = perroPantallaEdicion.Raza;
             textBox2.Text = perroPantallaEdicion.Dueño;
@@ -188,18 +192,30 @@ namespace WindowsFormsApp2
 
         }
 
-        //Boton Tarjeta de Vacunas
         private void button4_Click(object sender, EventArgs e)
         {
-            TarjetaVacunas TarjetaVacunas = new TarjetaVacunas(panel7);
+            // Obtener el ID del perro desde label4
+            int idPerro = int.Parse(label4.Text.Split(':')[1].Trim());
 
-            if (!panel7.Controls.Contains(TarjetaVacunas))
+            // Crear la instancia de TarjetaVacunas pasando el ID y el panel
+            TarjetaVacunas tarjetaVacunas = new TarjetaVacunas(panel7, idPerro);
+
+            if (!panel7.Controls.Contains(tarjetaVacunas))
             {
-                panel7.Controls.Add(TarjetaVacunas);
-                TarjetaVacunas.Dock = DockStyle.Fill;
-                TarjetaVacunas.BringToFront();
+                panel7.Controls.Clear();  // Limpiar los controles previos
+                panel7.Controls.Add(tarjetaVacunas);
+                tarjetaVacunas.Dock = DockStyle.Fill;
+                tarjetaVacunas.BringToFront();
+            }
+            else
+            {
+                tarjetaVacunas.BringToFront();  // En caso de que ya esté agregado, traerlo al frente
             }
         }
+
+
+
+
 
         private void label4_Click(object sender, EventArgs e)
         {
