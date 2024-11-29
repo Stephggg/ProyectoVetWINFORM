@@ -296,5 +296,10 @@ namespace WindowsFormsApp2
             }
         }
 
+        //Boton Confirmar Vacuna
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
