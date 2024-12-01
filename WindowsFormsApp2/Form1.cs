@@ -173,6 +173,17 @@ namespace WindowsFormsApp2
         {
 
         }
+
+       //Boton Creditos
+        private void button6_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Programa creado por: Rene Sandoval, Stephany Flores, y Emma Serrano");
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 
 }
