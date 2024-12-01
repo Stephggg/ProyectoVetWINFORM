@@ -301,5 +301,10 @@ namespace WindowsFormsApp2
         {
 
         }
+
+        private void TarjetaVacunas_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

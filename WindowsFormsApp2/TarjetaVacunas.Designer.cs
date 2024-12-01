@@ -195,6 +195,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "TarjetaVacunas";
             this.Size = new System.Drawing.Size(976, 828);
+            this.Load += new System.EventHandler(this.TarjetaVacunas_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
