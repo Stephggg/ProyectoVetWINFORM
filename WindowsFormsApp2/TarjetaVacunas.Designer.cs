@@ -94,7 +94,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(130, 30);
             this.button1.TabIndex = 81;
-            this.button1.Text = "Eliminar";
+            this.button1.Text = "❌ Eliminar";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
@@ -111,7 +111,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(111, 30);
             this.button2.TabIndex = 80;
-            this.button2.Text = "Regresar";
+            this.button2.Text = "↩︎ Regresar";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -155,7 +155,7 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
-            this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label1.Cursor = System.Windows.Forms.Cursors.Default;
             this.label1.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(47, 244);
             this.label1.Name = "label1";
@@ -167,7 +167,7 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
-            this.label3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label3.Cursor = System.Windows.Forms.Cursors.Default;
             this.label3.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(21, 32);
             this.label3.Name = "label3";
@@ -188,7 +188,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(207, 30);
             this.button3.TabIndex = 84;
-            this.button3.Text = "Confirmar Vacuna Agendada";
+            this.button3.Text = "✔️ Confirmar Vacuna Agendada";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
