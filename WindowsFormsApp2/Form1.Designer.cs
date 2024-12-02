@@ -60,7 +60,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(862, 575);
             this.panel1.TabIndex = 30;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // btnReportes
             // 
@@ -208,9 +207,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel7.BackgroundImage")));
             this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel7.Location = new System.Drawing.Point(224, 12);
+            this.panel7.Location = new System.Drawing.Point(224, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(638, 554);
+            this.panel7.Size = new System.Drawing.Size(638, 575);
             this.panel7.TabIndex = 32;
             // 
             // Form1
@@ -229,7 +228,6 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Super Dog";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).EndInit();
