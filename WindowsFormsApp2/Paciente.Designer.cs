@@ -52,11 +52,11 @@
             // 
             // label7
             // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label7.AutoSize = true;
             this.label7.Cursor = System.Windows.Forms.Cursors.Default;
             this.label7.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(72, 90);
+            this.label7.MaximumSize = new System.Drawing.Size(850, 700);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(167, 23);
             this.label7.TabIndex = 47;
@@ -65,7 +65,6 @@
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.FlatAppearance.BorderSize = 0;
@@ -73,6 +72,7 @@
             this.button1.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.Transparent;
             this.button1.Location = new System.Drawing.Point(465, 504);
+            this.button1.MaximumSize = new System.Drawing.Size(850, 700);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(135, 30);
             this.button1.TabIndex = 44;
@@ -82,7 +82,6 @@
             // 
             // button2
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
             this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button2.FlatAppearance.BorderSize = 0;
@@ -90,6 +89,7 @@
             this.button2.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.button2.Location = new System.Drawing.Point(300, 504);
+            this.button2.MaximumSize = new System.Drawing.Size(850, 700);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(135, 30);
             this.button2.TabIndex = 45;
@@ -99,11 +99,11 @@
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Cursor = System.Windows.Forms.Cursors.Default;
             this.label1.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(167, 222);
+            this.label1.MaximumSize = new System.Drawing.Size(850, 700);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 23);
             this.label1.TabIndex = 35;
@@ -111,11 +111,11 @@
             // 
             // label2
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Cursor = System.Windows.Forms.Cursors.Default;
             this.label2.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(46, 428);
+            this.label2.MaximumSize = new System.Drawing.Size(850, 700);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(190, 23);
             this.label2.TabIndex = 36;
@@ -123,11 +123,11 @@
             // 
             // label3
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Cursor = System.Windows.Forms.Cursors.Default;
             this.label3.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(177, 156);
+            this.label3.MaximumSize = new System.Drawing.Size(850, 700);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 23);
             this.label3.TabIndex = 37;
@@ -135,11 +135,11 @@
             // 
             // label5
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.AutoSize = true;
             this.label5.Cursor = System.Windows.Forms.Cursors.Default;
             this.label5.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(141, 288);
+            this.label5.MaximumSize = new System.Drawing.Size(850, 700);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(93, 161);
             this.label5.TabIndex = 39;
@@ -147,10 +147,10 @@
             // 
             // textBox5
             // 
-            this.textBox5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBox5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.textBox5.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox5.Location = new System.Drawing.Point(243, 288);
+            this.textBox5.MaximumSize = new System.Drawing.Size(850, 700);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(319, 32);
             this.textBox5.TabIndex = 33;
@@ -158,10 +158,10 @@
             // 
             // textBox4
             // 
-            this.textBox4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBox4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.textBox4.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox4.Location = new System.Drawing.Point(241, 156);
+            this.textBox4.MaximumSize = new System.Drawing.Size(850, 700);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(319, 32);
             this.textBox4.TabIndex = 32;
@@ -169,10 +169,10 @@
             // 
             // textBox2
             // 
-            this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBox2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.textBox2.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.Location = new System.Drawing.Point(241, 222);
+            this.textBox2.MaximumSize = new System.Drawing.Size(850, 700);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(318, 32);
             this.textBox2.TabIndex = 31;
@@ -180,10 +180,10 @@
             // 
             // textBox1
             // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.textBox1.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(242, 90);
+            this.textBox1.MaximumSize = new System.Drawing.Size(850, 700);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(318, 32);
             this.textBox1.TabIndex = 30;
@@ -191,21 +191,21 @@
             // 
             // dtpFechaRegistro
             // 
-            this.dtpFechaRegistro.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dtpFechaRegistro.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dtpFechaRegistro.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaRegistro.Location = new System.Drawing.Point(242, 421);
+            this.dtpFechaRegistro.MaximumSize = new System.Drawing.Size(850, 700);
             this.dtpFechaRegistro.Name = "dtpFechaRegistro";
             this.dtpFechaRegistro.Size = new System.Drawing.Size(350, 32);
             this.dtpFechaRegistro.TabIndex = 49;
             // 
             // label6
             // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
             this.label6.Cursor = System.Windows.Forms.Cursors.Default;
             this.label6.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(175, 354);
+            this.label6.MaximumSize = new System.Drawing.Size(850, 700);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(57, 23);
             this.label6.TabIndex = 40;
@@ -213,7 +213,6 @@
             // 
             // checkBox1
             // 
-            this.checkBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.checkBox1.AutoSize = true;
             this.checkBox1.BackColor = System.Drawing.SystemColors.Window;
             this.checkBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
@@ -221,6 +220,7 @@
             this.checkBox1.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox1.ForeColor = System.Drawing.SystemColors.Window;
             this.checkBox1.Location = new System.Drawing.Point(236, 354);
+            this.checkBox1.MaximumSize = new System.Drawing.Size(850, 700);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(15, 14);
             this.checkBox1.TabIndex = 42;
@@ -229,12 +229,12 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.richTextBox1.Enabled = false;
             this.richTextBox1.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.Location = new System.Drawing.Point(257, 354);
+            this.richTextBox1.MaximumSize = new System.Drawing.Size(850, 700);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(297, 56);
             this.richTextBox1.TabIndex = 43;
@@ -243,11 +243,11 @@
             // 
             // label4
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
             this.label4.Cursor = System.Windows.Forms.Cursors.Default;
             this.label4.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(198, 24);
+            this.label4.MaximumSize = new System.Drawing.Size(850, 700);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 23);
             this.label4.TabIndex = 51;
@@ -258,6 +258,7 @@
             this.lblErrorNombre.AutoSize = true;
             this.lblErrorNombre.ForeColor = System.Drawing.Color.Red;
             this.lblErrorNombre.Location = new System.Drawing.Point(240, 125);
+            this.lblErrorNombre.MaximumSize = new System.Drawing.Size(850, 700);
             this.lblErrorNombre.Name = "lblErrorNombre";
             this.lblErrorNombre.Size = new System.Drawing.Size(35, 13);
             this.lblErrorNombre.TabIndex = 52;
@@ -269,6 +270,7 @@
             this.lblErrorRaza.AutoSize = true;
             this.lblErrorRaza.ForeColor = System.Drawing.Color.Red;
             this.lblErrorRaza.Location = new System.Drawing.Point(240, 191);
+            this.lblErrorRaza.MaximumSize = new System.Drawing.Size(850, 700);
             this.lblErrorRaza.Name = "lblErrorRaza";
             this.lblErrorRaza.Size = new System.Drawing.Size(35, 13);
             this.lblErrorRaza.TabIndex = 53;
@@ -280,6 +282,7 @@
             this.lblErrorDueño.AutoSize = true;
             this.lblErrorDueño.ForeColor = System.Drawing.Color.Red;
             this.lblErrorDueño.Location = new System.Drawing.Point(240, 257);
+            this.lblErrorDueño.MaximumSize = new System.Drawing.Size(850, 700);
             this.lblErrorDueño.Name = "lblErrorDueño";
             this.lblErrorDueño.Size = new System.Drawing.Size(35, 13);
             this.lblErrorDueño.TabIndex = 54;
@@ -291,6 +294,7 @@
             this.lblErrorTelefono.AutoSize = true;
             this.lblErrorTelefono.ForeColor = System.Drawing.Color.Red;
             this.lblErrorTelefono.Location = new System.Drawing.Point(240, 323);
+            this.lblErrorTelefono.MaximumSize = new System.Drawing.Size(850, 700);
             this.lblErrorTelefono.Name = "lblErrorTelefono";
             this.lblErrorTelefono.Size = new System.Drawing.Size(35, 13);
             this.lblErrorTelefono.TabIndex = 55;

@@ -156,13 +156,6 @@ namespace WindowsFormsApp2
 
 
 
-        private void btnReportes_Click_1(object sender, EventArgs e)
-        {
-            // Mover el panel como lo has definido
-            panel4.Location = new Point(211, 455);
-
-
-        }
 
     }
 

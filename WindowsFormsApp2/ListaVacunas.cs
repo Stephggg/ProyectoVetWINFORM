@@ -79,23 +79,25 @@ namespace WindowsFormsApp2
             foreach (var linea in vacunasData)
             {
                 var partes = linea.Split(',');
-                if (partes.Length >= 3 && partes[0].StartsWith("ID: ") && int.TryParse(partes[0].Substring(4), out int id))
+                if (partes.Length >= 4 && partes[0].StartsWith("ID: ") && int.TryParse(partes[0].Substring(4), out int id))
                 {
                     if (perrosDict.TryGetValue(id, out var infoPerro))
                     {
-                        // Extraemos la información: Vacuna y Fecha Agendada
+                        // Extraemos la información: Vacuna, Fecha Agendada y Precio
                         var vacuna = partes[1].Split(':')[1].Trim();
                         var fechaAgendadaStr = partes[2].Split(':')[1].Trim();
+                        var precio = partes[3].Split(':')[1].Trim();  // Extraemos el precio
 
                         // Agregamos la fila
                         filas.Add(new object[] {
-                            id,
-                            infoPerro.Nombre,
-                            infoPerro.Dueño,
-                            infoPerro.Telefono,
-                            vacuna,
-                            fechaAgendadaStr
-                        });
+                    id,
+                    infoPerro.Nombre,
+                    infoPerro.Dueño,
+                    infoPerro.Telefono,
+                    vacuna,
+                    fechaAgendadaStr,
+                    precio  // Agregar el precio
+                });
                     }
                 }
             }
@@ -103,13 +105,13 @@ namespace WindowsFormsApp2
             // Configura el DataGridView
             dataGridView1.Columns.Clear();
             dataGridView1.Columns.Add("ID", "ID");
-            dataGridView1.Columns.Add("Nombre", "Nombre del Perro");
+            dataGridView1.Columns.Add("Nombre", "Nombre");
             dataGridView1.Columns.Add("Dueño", "Dueño");
             dataGridView1.Columns.Add("Telefono", "Teléfono");
             dataGridView1.Columns.Add("Vacuna", "Vacuna");
-            dataGridView1.Columns.Add("Fecha Agendada", "Fecha Agendada");  // Renombrado a "Fecha Agendada"
+            dataGridView1.Columns.Add("Fecha Agendada", "Fecha Agendada");
+            dataGridView1.Columns.Add("Precio", "Precio");  
 
-            // Llama al método para configurar el estilo Fill
             ConfigurarEstiloDataGridView();
 
             // Agrega las filas
@@ -118,6 +120,7 @@ namespace WindowsFormsApp2
                 dataGridView1.Rows.Add(fila);
             }
         }
+
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

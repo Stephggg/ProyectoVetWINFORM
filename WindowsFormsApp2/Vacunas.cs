@@ -17,7 +17,6 @@ namespace WindowsFormsApp2
     public partial class Regresar : UserControl
     {
         private Panel panel7;
-
         private int perroID; // Variable para almacenar el ID del perro
 
         public Regresar(Panel panel, int idPerro)
@@ -27,19 +26,11 @@ namespace WindowsFormsApp2
             this.perroID = idPerro; // Asigna el ID del perro seleccionado
 
             // Rellenar el ComboBox con las vacunas disponibles
-            comboBox1.Items.AddRange(preciosVacunas.Keys.ToArray());
+            comboBox1.Items.AddRange(new string[] { "Especial Cachorros", "Polivalente", "Traqueobronquitis", "Antirrábica" });
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;  // Asignar el evento para cuando se seleccione una vacuna
         }
 
-
-        private Dictionary<string, decimal> preciosVacunas = new Dictionary<string, decimal>
-        {
-            { "Especial Cachorros", 200.00m },    // Precio en Córdobas
-            { "Polivalente", 150.00m },           // Precio en Córdobas
-            { "Traqueobronquitis", 100.00m },      // Precio en Córdobas
-            { "Antirrábica", 180.00m }            // Precio en Córdobas
-        };
-
+        // Método para obtener el perro por ID (simulado, ya que no se está usando base de datos)
         private Perro ObtenerPerroPorID(int id)
         {
             List<Perro> perros = new List<Perro>();
@@ -74,6 +65,7 @@ namespace WindowsFormsApp2
             return perros.FirstOrDefault(p => p.ID == id);  // Devuelve el perro que coincide con el ID
         }
 
+        // Botón para regresar y cargar pantalla de edición
         private void button2_Click(object sender, EventArgs e)
         {
             // Buscar el perro por ID en el archivo
@@ -100,8 +92,6 @@ namespace WindowsFormsApp2
                 pantallaControles.BringToFront();
             }
         }
-
-
 
 
 
@@ -137,8 +127,37 @@ namespace WindowsFormsApp2
                 return;
             }
 
-            // Obtener el precio de la vacuna seleccionada
-            decimal precioVacuna = preciosVacunas[vacunaSeleccionada];
+            // Obtener el precio ingresado en textBox1 o usar el valor predeterminado según la vacuna seleccionada
+            decimal precioVacuna;
+
+            // Asignar precio por defecto según la vacuna seleccionada
+            if (vacunaSeleccionada == "Especial Cachorros")
+            {
+                precioVacuna = 200.00m;
+            }
+            else if (vacunaSeleccionada == "Polivalente")
+            {
+                precioVacuna = 150.00m;
+            }
+            else if (vacunaSeleccionada == "Traqueobronquitis")
+            {
+                precioVacuna = 100.00m;
+            }
+            else if (vacunaSeleccionada == "Antirrábica")
+            {
+                precioVacuna = 180.00m;
+            }
+            else
+            {
+                MessageBox.Show("Vacuna no válida.");
+                return;
+            }
+
+            // Verificar si el usuario ha ingresado un precio personalizado
+            if (decimal.TryParse(textBox1.Text, out decimal precioIngresado))
+            {
+                precioVacuna = precioIngresado; // Usar el precio personalizado
+            }
 
             // Guardar en un archivo de texto
             string filePath = "vacunas.txt";
@@ -150,6 +169,7 @@ namespace WindowsFormsApp2
 
             MessageBox.Show("Vacuna suministrada y guardada correctamente.");
         }
+
 
 
         // Botón AgendarVacuna
@@ -184,8 +204,37 @@ namespace WindowsFormsApp2
                 return;
             }
 
-            // Obtener el precio de la vacuna seleccionada
-            decimal precioVacuna = preciosVacunas[vacunaSeleccionada];
+            // Obtener el precio ingresado en textBox1 o usar el valor predeterminado según la vacuna seleccionada
+            decimal precioVacuna;
+
+            // Asignar precio por defecto según la vacuna seleccionada
+            if (vacunaSeleccionada == "Especial Cachorros")
+            {
+                precioVacuna = 200.00m;
+            }
+            else if (vacunaSeleccionada == "Polivalente")
+            {
+                precioVacuna = 150.00m;
+            }
+            else if (vacunaSeleccionada == "Traqueobronquitis")
+            {
+                precioVacuna = 100.00m;
+            }
+            else if (vacunaSeleccionada == "Antirrábica")
+            {
+                precioVacuna = 180.00m;
+            }
+            else
+            {
+                MessageBox.Show("Vacuna no válida.");
+                return;
+            }
+
+            // Verificar si el usuario ha ingresado un precio personalizado
+            if (decimal.TryParse(textBox1.Text, out decimal precioIngresado))
+            {
+                precioVacuna = precioIngresado; // Usar el precio personalizado
+            }
 
             // Guardar la vacuna y la fecha en un archivo de texto
             string filePath = "vacunas_agendadas.txt";
@@ -197,6 +246,9 @@ namespace WindowsFormsApp2
 
             MessageBox.Show("Vacuna agendada correctamente.");
         }
+
+
+
 
 
 
@@ -217,12 +269,25 @@ namespace WindowsFormsApp2
             // Obtener el nombre de la vacuna seleccionada
             string vacunaSeleccionada = comboBox1.SelectedItem?.ToString();
 
-            // Si se seleccionó una vacuna válida, actualizar el precio en el TextBox
-            if (vacunaSeleccionada != null && preciosVacunas.ContainsKey(vacunaSeleccionada))
+            // Asignar el precio correspondiente en el TextBox según la vacuna seleccionada
+            if (vacunaSeleccionada == "Especial Cachorros")
             {
-                decimal precio = preciosVacunas[vacunaSeleccionada];
-                textBox1.Text = $"C$ {precio:0.00}";  // Mostrar el precio en el TextBox
+                textBox1.Text = "200.00";
+            }
+            else if (vacunaSeleccionada == "Polivalente")
+            {
+                textBox1.Text = "150.00";
+            }
+            else if (vacunaSeleccionada == "Traqueobronquitis")
+            {
+                textBox1.Text = "100.00";
+            }
+            else if (vacunaSeleccionada == "Antirrábica")
+            {
+                textBox1.Text = "180.00";
             }
         }
+
+
     }
 }

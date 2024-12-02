@@ -100,13 +100,14 @@ namespace WindowsFormsApp2
             foreach (var linea in vacunasAgendadasData)
             {
                 var partes = linea.Split(',');
-                if (partes.Length >= 3 && partes[0].StartsWith("ID: ") && int.TryParse(partes[0].Substring(4), out int id))
+
+                if (partes.Length >= 4 && partes[0].StartsWith("ID: ") && int.TryParse(partes[0].Substring(4), out int id))
                 {
                     if (id == idPerro && perrosDict.TryGetValue(id, out var infoPerro))
                     {
-                        var vacuna = partes[1].Split(':')[1].Trim();
-                        var fechaAgendadaStr = partes[2].Split(':')[1].Trim();
-                        var precio = "C$ 180.00"; // Precio fijo para este ejemplo (puedes ajustar este valor)
+                        var vacuna = partes[1].Split(':')[1].Trim();  // Extraemos el nombre de la vacuna
+                        var fechaAgendadaStr = partes[2].Split(':')[1].Trim();  // Extraemos la fecha
+                        var precio = partes[3].Split(':')[1].Trim();  // Extraemos el precio
 
                         filasVacunasAgendadas.Add(new object[] {
                     id,
@@ -114,7 +115,7 @@ namespace WindowsFormsApp2
                     infoPerro.Dueño,
                     infoPerro.Telefono,
                     fechaAgendadaStr,
-                    precio,  // Añade el precio
+                    precio,  // Añadimos el precio
                     vacuna
                 });
                     }
@@ -131,7 +132,7 @@ namespace WindowsFormsApp2
                     {
                         var vacuna = partes[1].Split(':')[1].Trim();
                         var fechaStr = partes[2].Split(':')[1].Trim();
-                        var precio = "C$ 180.00"; // Precio fijo para este ejemplo (puedes ajustar este valor)
+                        var precio = "C$ 180.00"; // Aquí puedes ajustar según tu lógica para obtener el precio
 
                         filasVacunasSuministradas.Add(new object[] {
                     id,
@@ -139,7 +140,7 @@ namespace WindowsFormsApp2
                     infoPerro.Dueño,
                     infoPerro.Telefono,
                     fechaStr,
-                    precio,  // Añade el precio
+                    precio,  // Añadimos el precio
                     vacuna
                 });
                     }
@@ -150,6 +151,7 @@ namespace WindowsFormsApp2
             ConfigurarDataGridView(dataGridView1, filasVacunasSuministradas);
             ConfigurarDataGridView(dataGridView2, filasVacunasAgendadas);
         }
+
 
 
         private void ConfigurarDataGridView(DataGridView dataGridView, List<object[]> filas)
