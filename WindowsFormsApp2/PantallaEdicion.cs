@@ -11,6 +11,7 @@ namespace WindowsFormsApp2
         Form1 form1;
         private Panel panel7;
         private int idPerro;
+
         private List<Perro> CargarPerrosDesdeArchivo()
         {
             List<Perro> perros = new List<Perro>();
@@ -50,32 +51,49 @@ namespace WindowsFormsApp2
 
         }
 
-        public void CargarDatos(WindowsFormsApp2.Listar.Perro perroListar)
-        {
-            // Crea un nuevo objeto Perro para la edición.
-            var perroPantallaEdicion = new Perro
-            {
-                ID = perroListar.ID,
-                Nombre = perroListar.Nombre,
-                Raza = perroListar.Raza,
-                Dueño = perroListar.Dueño,
-                Telefono = perroListar.Telefono,
-                Fecha_De_Nacimiento = perroListar.Fecha,
-                Nota = perroListar.Nota
-            };
 
-            // Llena los controles de la interfaz con los datos del perro.
-            label4.Text = $"ID: {perroPantallaEdicion.ID}";
-            textBox1.Text = perroPantallaEdicion.Nombre;
-            textBox4.Text = perroPantallaEdicion.Raza;
-            textBox2.Text = perroPantallaEdicion.Dueño;
-            textBox5.Text = perroPantallaEdicion.Telefono;
-            richTextBox1.Text = perroPantallaEdicion.Nota;
+        // PantallaEdicion.cs
+        public void CargarDatos(Perro perro)
+        {
+            if (perro != null)
+            {
+                label4.Text = $"ID: {perro.ID}";
+                textBox1.Text = perro.Nombre;
+                textBox4.Text = perro.Raza;
+                textBox2.Text = perro.Dueño;
+                textBox5.Text = perro.Telefono;
+                richTextBox1.Text = perro.Nota;
+
+                // Cargar la fecha en el DateTimePicker
+                DateTime fechaRegistro;
+                if (DateTime.TryParse(perro.Fecha_De_Nacimiento, out fechaRegistro))
+                {
+                    dtpFechaRegistro.Value = fechaRegistro; // Asignamos la fecha al DateTimePicker
+                }
+                else
+                {
+                    dtpFechaRegistro.Value = DateTime.Now; // Si la fecha no es válida, se pone la fecha actual
+                }
+            }
+            else
+            {
+                MessageBox.Show("No se encontraron datos para este perro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        //Boton Elimiar
+
+        // Botón Eliminar
         private void button1_Click(object sender, EventArgs e)
         {
+            // Mostrar cuadro de confirmación
+            DialogResult result = MessageBox.Show("¿Estás seguro de que deseas eliminar este perro?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            // Si el usuario selecciona "No", salir del método
+            if (result == DialogResult.No)
+            {
+                return;
+            }
+
             // Obtiene el ID del perro desde la etiqueta.
             int id = int.Parse(label4.Text.Split(':')[1].Trim());
 
@@ -107,7 +125,7 @@ namespace WindowsFormsApp2
             }
         }
 
-        //Boton Editar
+
         private void button2_Click(object sender, EventArgs e)
         {
             int id = int.Parse(label4.Text.Split(':')[1].Trim());
@@ -116,6 +134,7 @@ namespace WindowsFormsApp2
             string nuevoDueño = textBox2.Text;
             string nuevoTelefono = textBox5.Text;
             string nuevaNota = richTextBox1.Text;
+            string nuevaFecha = dtpFechaRegistro.Value.ToString("yyyy-MM-dd"); // Obtener la fecha del DateTimePicker
 
             List<Perro> perros = CargarPerrosDesdeArchivo();
 
@@ -137,8 +156,9 @@ namespace WindowsFormsApp2
                 perro.Dueño = string.IsNullOrWhiteSpace(nuevoDueño) ? perro.Dueño : nuevoDueño;
                 perro.Telefono = string.IsNullOrWhiteSpace(nuevoTelefono) ? perro.Telefono : nuevoTelefono;
                 perro.Nota = string.IsNullOrWhiteSpace(nuevaNota) ? perro.Nota : nuevaNota;
+                perro.Fecha_De_Nacimiento = nuevaFecha; // Actualizar la fecha con la del DateTimePicker
 
-                GuardarPerrosEnArchivo(perros); 
+                GuardarPerrosEnArchivo(perros);
 
                 MessageBox.Show("Datos del perro actualizados con éxito.");
             }
@@ -147,6 +167,7 @@ namespace WindowsFormsApp2
                 MessageBox.Show("Perro no encontrado.");
             }
         }
+
 
 
         private void GuardarPerrosEnArchivo(List<Perro> perros)
@@ -216,45 +237,57 @@ namespace WindowsFormsApp2
 
 
 
-
-        private void label4_Click(object sender, EventArgs e)
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (checkBox1.Checked)
+            {
+                richTextBox1.Enabled = true;
+            }
+            else
+            {
+                richTextBox1.Enabled = false;
+            }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
         }
 
-        private void textBox4_TextChanged(object sender, EventArgs e)
+        private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
         {
+            // Solo permite números y teclas de control (como backspace)
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
 
+            // Limita a un máximo de 8 caracteres
+            if (char.IsDigit(e.KeyChar) && textBox5.Text.Length >= 8)
+            {
+                e.Handled = true;
+            }
         }
 
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void dtpFechaRegistro_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -66,10 +66,12 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView1.Location = new System.Drawing.Point(18, 73);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 73);
+            this.dataGridView1.MaximumSize = new System.Drawing.Size(632, 499);
+            this.dataGridView1.MinimumSize = new System.Drawing.Size(632, 499);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.Size = new System.Drawing.Size(612, 445);
+            this.dataGridView1.Size = new System.Drawing.Size(632, 499);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -109,7 +111,7 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "ListaVacunas";
-            this.Size = new System.Drawing.Size(646, 538);
+            this.Size = new System.Drawing.Size(638, 575);
             this.Load += new System.EventHandler(this.ListaVacunas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

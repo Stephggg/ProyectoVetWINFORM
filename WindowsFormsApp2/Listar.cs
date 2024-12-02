@@ -41,10 +41,28 @@ namespace WindowsFormsApp2
             ActualizarDataGridView(perros);
             this.panel7 = panel;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
+            ConfigurarEstiloDataGridView();
 
 
         }
 
+
+        private void ConfigurarEstiloDataGridView()
+        {
+            dataGridView1.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
+
+            // Configurar las columnas para que se ajusten al contenido
+            foreach (DataGridViewColumn columna in dataGridView1.Columns)
+            {
+                columna.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells; // Ajusta el ancho según el contenido de todas las celdas
+            }
+
+            // Ajustar automáticamente las filas según su contenido
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+            // Opcional: Configurar para que el texto se ajuste dentro de las celdas
+            dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+        }
 
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -52,12 +70,27 @@ namespace WindowsFormsApp2
 
         }
 
+        // Listar.cs
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
+                // Obtener el perro seleccionado desde la lista de perros
                 var perroSeleccionado = perros[e.RowIndex];
 
+                // Crear una instancia de Perros.Perro y copiar los valores
+                Perros.Perro perroParaEditar = new Perros.Perro
+                {
+                    ID = perroSeleccionado.ID,
+                    Nombre = perroSeleccionado.Nombre,
+                    Raza = perroSeleccionado.Raza,
+                    Dueño = perroSeleccionado.Dueño,
+                    Telefono = perroSeleccionado.Telefono,
+                    Fecha_De_Nacimiento = perroSeleccionado.Fecha,  // Asumiendo que 'Fecha' es la fecha de nacimiento
+                    Nota = perroSeleccionado.Nota
+                };
+
+                // Crear la instancia de PantallaEdicion y cargar los datos
                 PantallaEdicion pantallaControl = new PantallaEdicion(panel7);
 
                 if (!panel7.Controls.Contains(pantallaControl))
@@ -66,9 +99,14 @@ namespace WindowsFormsApp2
                     pantallaControl.Dock = DockStyle.Fill;
                     pantallaControl.BringToFront();
                 }
-                pantallaControl.CargarDatos(perroSeleccionado);
+
+                // Pasar el objeto Perros.Perro a la pantalla de edición
+                pantallaControl.CargarDatos(perroParaEditar);
             }
         }
+
+
+
 
 
 

@@ -17,19 +17,24 @@ namespace WindowsFormsApp2
         public ListaVacunas()
         {
             InitializeComponent();
+            ConfigurarEstiloDataGridView();
         }
 
         private void ConfigurarEstiloDataGridView()
         {
-            // Configura las columnas del DataGridView para usar el modo Fill
+            dataGridView1.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
+
+            // Configurar las columnas para que se ajusten al contenido
             foreach (DataGridViewColumn columna in dataGridView1.Columns)
             {
-                columna.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                columna.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells; // Ajusta el ancho según el contenido de todas las celdas
             }
 
-            // Opcional: Configurar estilos adicionales
-            dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True; // Permitir que el texto se ajuste
-            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells; // Ajustar filas automáticamente
+            // Ajustar automáticamente las filas según su contenido
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+            // Opcional: Configurar para que el texto se ajuste dentro de las celdas
+            dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
         }
 
         private void label3_Click(object sender, EventArgs e)

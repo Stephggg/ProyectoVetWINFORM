@@ -10,11 +10,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VacunaNamespace;
+using Perros;
+
 
 namespace WindowsFormsApp2
 {
     public partial class TarjetaVacunas : UserControl
     {
+
         private Panel panel7;
         private int idPerro; // Agregamos la variable para almacenar el ID
 
@@ -25,19 +28,40 @@ namespace WindowsFormsApp2
             this.panel7 = panel;
             this.idPerro = idPerro;  // Guardamos el ID del perro
             CargarDatos();  // Llama a CargarDatos() al inicializar el formulario
+
         }
+
         private void ConfigurarEstiloDataGridView()
         {
-            // Configura las columnas del DataGridView para usar el modo Fill
+            dataGridView1.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
+
+            // Configurar las columnas para que se ajusten al contenido
             foreach (DataGridViewColumn columna in dataGridView1.Columns)
             {
-                columna.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                columna.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells; // Ajusta el ancho según el contenido de todas las celdas
             }
 
-            // Opcional: Configurar estilos adicionales
-            dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True; // Permitir que el texto se ajuste
-            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells; // Ajustar filas automáticamente
+            // Ajustar automáticamente las filas según su contenido
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+            // Opcional: Configurar para que el texto se ajuste dentro de las celdas
+            dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+            dataGridView2.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
+
+            // Configurar las columnas para que se ajusten al contenido
+            foreach (DataGridViewColumn columna in dataGridView2.Columns)
+            {
+                columna.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells; // Ajusta el ancho según el contenido de todas las celdas
+            }
+
+            // Ajustar automáticamente las filas según su contenido
+            dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+            // Opcional: Configurar para que el texto se ajuste dentro de las celdas
+            dataGridView2.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
         }
+
 
         private void CargarDatos()
         {
@@ -82,14 +106,16 @@ namespace WindowsFormsApp2
                     {
                         var vacuna = partes[1].Split(':')[1].Trim();
                         var fechaAgendadaStr = partes[2].Split(':')[1].Trim();
+                        var precio = "C$ 180.00"; // Precio fijo para este ejemplo (puedes ajustar este valor)
 
                         filasVacunasAgendadas.Add(new object[] {
                     id,
                     infoPerro.Nombre,
                     infoPerro.Dueño,
                     infoPerro.Telefono,
-                    vacuna,
-                    fechaAgendadaStr
+                    fechaAgendadaStr,
+                    precio,  // Añade el precio
+                    vacuna
                 });
                     }
                 }
@@ -105,14 +131,16 @@ namespace WindowsFormsApp2
                     {
                         var vacuna = partes[1].Split(':')[1].Trim();
                         var fechaStr = partes[2].Split(':')[1].Trim();
+                        var precio = "C$ 180.00"; // Precio fijo para este ejemplo (puedes ajustar este valor)
 
                         filasVacunasSuministradas.Add(new object[] {
                     id,
                     infoPerro.Nombre,
                     infoPerro.Dueño,
                     infoPerro.Telefono,
-                    vacuna,
-                    fechaStr
+                    fechaStr,
+                    precio,  // Añade el precio
+                    vacuna
                 });
                     }
                 }
@@ -123,6 +151,7 @@ namespace WindowsFormsApp2
             ConfigurarDataGridView(dataGridView2, filasVacunasAgendadas);
         }
 
+
         private void ConfigurarDataGridView(DataGridView dataGridView, List<object[]> filas)
         {
             dataGridView.Columns.Clear();
@@ -130,8 +159,9 @@ namespace WindowsFormsApp2
             dataGridView.Columns.Add("Nombre", "Nombre del Perro");
             dataGridView.Columns.Add("Dueño", "Dueño");
             dataGridView.Columns.Add("Telefono", "Teléfono");
+            dataGridView.Columns.Add("Fecha", "Fecha");  // Asegúrate de que esta columna esté configurada correctamente
+            dataGridView.Columns.Add("Precio", "Precio C$");
             dataGridView.Columns.Add("Vacuna", "Vacuna");
-            dataGridView.Columns.Add("Fecha", "Fecha");  // Cambiado a "Fecha" para ambas
 
             // Llama al método para configurar el estilo Fill
             ConfigurarEstiloDataGridView();
@@ -142,6 +172,8 @@ namespace WindowsFormsApp2
                 dataGridView.Rows.Add(fila);
             }
         }
+
+
 
 
 
@@ -171,6 +203,15 @@ namespace WindowsFormsApp2
         {
             PantallaEdicion pantallaControles = new PantallaEdicion(panel7);
 
+            // Cargar los datos del perro desde el archivo
+            var perros = CargarPerrosDesdeArchivo();
+            var perroActual = perros.FirstOrDefault(p => p.ID == idPerro);
+
+            if (perroActual != null)
+            {
+                pantallaControles.CargarDatos(perroActual);
+            }
+
             if (!panel7.Controls.Contains(pantallaControles))
             {
                 panel7.Controls.Add(pantallaControles);
@@ -179,31 +220,38 @@ namespace WindowsFormsApp2
             }
         }
 
-
-        //DataGrid Vacunas Suministradas
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        // Método auxiliar para cargar datos de perros (extraído del otro formulario para reutilizar)
+        private List<Perro> CargarPerrosDesdeArchivo()
         {
-
+            List<Perro> perros = new List<Perro>();
+            try
+            {
+                using (StreamReader reader = new StreamReader("perros.txt"))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        var datos = line.Split(',');
+                        perros.Add(new Perro
+                        {
+                            ID = int.Parse(datos[0]),
+                            Nombre = datos[1],
+                            Raza = datos[2],
+                            Dueño = datos[3],
+                            Telefono = datos[4],
+                            Fecha_De_Nacimiento = datos[5],
+                            Nota = datos[6]
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar los datos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return perros;
         }
 
-        //DataGrid Vacunas Agendadas
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        //Boton Suministrar Vacuna
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //Boton Eliminar Vacuna
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
 
 
 
@@ -296,11 +344,85 @@ namespace WindowsFormsApp2
             }
         }
 
-        //Boton Confirmar Vacuna
         private void button3_Click_1(object sender, EventArgs e)
         {
+            // Verifica si se ha seleccionado alguna fila en el DataGridView de vacunas agendadas (dataGridView2)
+            if (dataGridView2.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Por favor, selecciona una fila en el DataGridView de vacunas agendadas.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            // Obtén los datos de la fila seleccionada en dataGridView2 (vacunas agendadas)
+            var selectedRow = dataGridView2.SelectedRows[0];
+            string vacuna = selectedRow.Cells["Vacuna"].Value.ToString();
+            string fechaAgendada = selectedRow.Cells["Fecha"].Value.ToString();
+            string idVacuna = selectedRow.Cells["ID"].Value.ToString();  // Asumimos que el ID está en la columna "ID"
+
+            // Mostrar un mensaje de confirmación
+            var confirmResult = MessageBox.Show($"¿Deseas suministrar la vacuna {vacuna} para el perro con ID {idVacuna}?",
+                                                "Confirmar Vacuna",
+                                                MessageBoxButtons.YesNo,
+                                                MessageBoxIcon.Question);
+
+            if (confirmResult == DialogResult.Yes)
+            {
+                // Obtiene la fecha actual (se actualizará la fecha a la actual en el formato dd/MM/yyyy)
+                string fechaSuministrada = DateTime.Now.ToString("dd/MM/yyyy");  // Fecha actual con formato dd/MM/yyyy
+                string precio = selectedRow.Cells["Precio"].Value.ToString(); // Asumiendo que tienes el precio en la columna "Precio"
+                string nombrePerro = selectedRow.Cells["Nombre"].Value.ToString();
+                string dueño = selectedRow.Cells["Dueño"].Value.ToString();
+                string telefono = selectedRow.Cells["Telefono"].Value.ToString();
+
+                // Agrega la vacuna al archivo de vacunas suministradas
+                AgregarVacunaAlArchivo("vacunas.txt", idVacuna, vacuna, fechaSuministrada, precio);
+
+                // Elimina la vacuna de las vacunas agendadas
+                EliminarVacunaDelArchivo("vacunas_agendadas.txt", idVacuna, vacuna, fechaAgendada);
+
+                // Actualiza el DataGridView para reflejar los cambios
+                try
+                {
+                    // Intentamos eliminar la fila de dataGridView2 (vacunas agendadas)
+                    dataGridView2.Rows.Remove(selectedRow);
+                }
+                catch (ArgumentException)
+                {
+                    // Si ocurre una excepción (por ejemplo, si la fila ya fue eliminada o no se puede eliminar), no hacemos nada
+                }
+
+                // Añade la vacuna a dataGridView1 (vacunas suministradas)
+                dataGridView1.Rows.Add(idVacuna, nombrePerro, dueño, telefono, fechaSuministrada, precio, vacuna);
+
+                // Muestra un mensaje de éxito
+                MessageBox.Show("La vacuna ha sido confirmada y movida a vacunas suministradas.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
+
+
+        // Método para agregar la vacuna al archivo de vacunas suministradas (vacunas.txt)
+        private void AgregarVacunaAlArchivo(string filePath, string idVacuna, string vacuna, string fecha, string precio)
+        {
+            try
+            {
+                // Formatea la nueva línea a agregar al archivo con el formato correcto
+                string nuevaLinea = $"ID: {idVacuna}, Vacuna: {vacuna}, Fecha: {fecha}, Precio: {precio}";
+
+                // Escribe la nueva línea al archivo
+                using (StreamWriter writer = new StreamWriter(filePath, append: true))
+                {
+                    writer.WriteLine(nuevaLinea);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Hubo un error al agregar la vacuna al archivo: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+
 
         private void TarjetaVacunas_Load_1(object sender, EventArgs e)
         {

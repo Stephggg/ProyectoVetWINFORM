@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Perros;
 
@@ -23,9 +24,80 @@ namespace WindowsFormsApp2
         {
             label4.Text = $"ID: {siguienteId}";
         }
+        private void InicializarEtiquetasDeError()
+        {
+            // Configura todas las etiquetas de error como invisibles al inicio
+            lblErrorNombre.Visible = false;
+            lblErrorRaza.Visible = false;
+            lblErrorDueño.Visible = false;
+            lblErrorTelefono.Visible = false;
+        }
+
+        private bool ValidarFormulario()
+        {
+            bool esValido = true;
+
+            // Validar Nombre
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                lblErrorNombre.Text = "Este campo es obligatorio.";
+                lblErrorNombre.Visible = true;
+                esValido = false;
+            }
+            else
+            {
+                lblErrorNombre.Visible = false;
+            }
+
+            // Validar Raza
+            if (string.IsNullOrWhiteSpace(textBox4.Text))
+            {
+                lblErrorRaza.Text = "Este campo es obligatorio.";
+                lblErrorRaza.Visible = true;
+                esValido = false;
+            }
+            else
+            {
+                lblErrorRaza.Visible = false;
+            }
+
+            // Validar Dueño
+            if (string.IsNullOrWhiteSpace(textBox2.Text))
+            {
+                lblErrorDueño.Text = "Este campo es obligatorio.";
+                lblErrorDueño.Visible = true;
+                esValido = false;
+            }
+            else
+            {
+                lblErrorDueño.Visible = false;
+            }
+
+            // Validar Teléfono (exactamente 8 dígitos)
+            if (textBox5.Text.Length != 8)
+            {
+                lblErrorTelefono.Text = "El teléfono debe tener exactamente 8 dígitos.";
+                lblErrorTelefono.Visible = true;
+                esValido = false;
+            }
+            else
+            {
+                lblErrorTelefono.Visible = false;
+            }
+
+            return esValido;
+        }
+
+
+
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (!ValidarFormulario())
+            {
+                return; // Si hay errores, no proceder
+            }
+
             try
             {
                 Perro nuevoPerro = new Perro
@@ -50,7 +122,6 @@ namespace WindowsFormsApp2
                 MessageBox.Show($"Error al registrar el perro: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void LimpiarFormulario()
         {
             textBox1.Clear();
@@ -156,81 +227,47 @@ namespace WindowsFormsApp2
             }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void textBox1_KeyPress_1(object sender, KeyPressEventArgs e)
         {
-
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
         }
 
-        private void label6_Click(object sender, EventArgs e)
+        private void textBox4_KeyPress_1(object sender, KeyPressEventArgs e)
         {
-
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void textBox2_KeyPress_1(object sender, KeyPressEventArgs e)
         {
-
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void textBox5_KeyPress_1(object sender, KeyPressEventArgs e)
         {
+            // Solo permite números y teclas de control
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
 
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
+            // Restringir a un máximo de 8 caracteres
+            if (char.IsDigit(e.KeyChar) && textBox5.Text.Length >= 8)
+            {
+                e.Handled = true;
+            }
         }
 
 
 
-        private void Paciente_Load(object sender, EventArgs e)
-        {
 
-        }
-
-        private void dtpFechaRegistro_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click_1(object sender, EventArgs e)
-        {
-
-        }
     }
 }
